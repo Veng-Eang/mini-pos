@@ -44,8 +44,9 @@ public class BrandCrudServiceImpl implements BrandCrudService{
 	
 	@Override
 	public BrandDto updateById(Long id, BrandDto brandUpdate) {
-		Brand brand = brandRepository.findByIdAndIsDeletedFalse(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Brand", id));
+//		Brand brand = brandRepository.findByIdAndIsDeletedFalse(id)
+//				.orElseThrow(() -> new ResourceNotFoundException("Brand", id));
+		Brand brand = brandMapper.toBrand(getById(id));
 		brand.setName(brandUpdate.getName());
 		return brandMapper.toBrandDto(brandRepository.save(brand));
 	}

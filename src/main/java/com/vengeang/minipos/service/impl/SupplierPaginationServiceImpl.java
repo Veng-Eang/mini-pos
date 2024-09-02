@@ -27,7 +27,8 @@ public class SupplierPaginationServiceImpl implements SupplierPaginationService 
 	public PageDto listByPaginationAndSorting(Map<String, String> param) {
 		Pageable pageable = PageUtil.getPageable(param);
 		Page<Supplier> supplierPage = supplierRepository.findByIsDeletedFalse(pageable);
-		Page<SupplierDto> supplierPageDto = supplierPage.map(s->supplierMapper.toSupplierDto(s));
+//		Page<SupplierDto> supplierPageDto = supplierPage.map(s->supplierMapper.toSupplierDto(s));
+		Page<SupplierDto> supplierPageDto = supplierPage.map(supplierMapper::toSupplierDto);
 		return new PageDto(supplierPageDto);
 	}
 
